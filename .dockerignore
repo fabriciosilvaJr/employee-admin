@@ -1,0 +1,14 @@
+.git
+.gitignore
+.vscode
+.idea
+node_modules
+vendor
+uploads
+application/logs
+application/cache
+pg_data
+*.md
+*.log
+*.zip
+*.tar.gz
