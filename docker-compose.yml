@@ -1,33 +1,33 @@
-version: '3.8'
-
 services:
   app:
     build: .
-    container_name: employee_app
+    container_name: ci3_app
     ports:
       - "8080:80"
     volumes:
       - .:/var/www/html
     depends_on:
-      - db
+      - postgres
     environment:
-      DB_HOST: db
-      DB_NAME: employeedb
+      DB_HOST: postgres
+      DB_NAME: codeigniter_test
       DB_USER: postgres
       DB_PASS: postgres
+    restart: always
 
-  db:
-    image: postgres:13
-    container_name: employee_db
+  postgres:
+    image: postgres:18
+    container_name: ci3_db
     environment:
-      POSTGRES_DB: employeedb
+      POSTGRES_DB: codeigniter_test
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
       - "5432:5432"
     volumes:
       - ./sql:/docker-entrypoint-initdb.d
-      - pg_data:/var/lib/postgresql/data
+       - pg_data:/var/lib/postgresql
+    restart: always
 
 volumes:
   pg_data:

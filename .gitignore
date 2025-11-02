@@ -1,75 +1,32 @@
-# ===============================
-# CodeIgniter 3 - Projeto Dockerizado
-# ===============================
+.DS_Store
 
-# 🧠 Diretórios de cache, logs e sessões
 application/cache/*
 !application/cache/index.html
 
 application/logs/*
 !application/logs/index.html
 
-application/sessions/*
-!application/sessions/index.html
+!application/*/.htaccess
 
-uploads/*
-!uploads/index.html
-tmp/
-*.tmp
-
-.env
-.env.*
-*.env
-*.ini
-*.local
-
-/sql/*.bak
-/sql/*.log
-/sql/*.tmp
-
-*.sql
-*.pgsql
-*.dump
-
-/vendor/
 composer.lock
+tests/mocks/database/ci_test.sqlite
 
+user_guide_src/build/*
+user_guide_src/cilexer/build/*
+user_guide_src/cilexer/dist/*
+user_guide_src/cilexer/pycilexer.egg-info/*
+/vendor/
 
-docker-compose.override.yml
-*.pid
-*.seed
-*.bak
-*.swp
-*.swo
-*.orig
-*.old
+# IDE Files
+#-------------------------
+/nbproject/
+.idea/*
 
-pg_data/
-docker-entrypoint-initdb.d/
-*.db
-
-
-node_modules/
-npm-debug.log
-yarn-error.log
-package-lock.json
-dist/
-build/
-
-.vscode/
-.idea/
-*.sublime-project
+## Sublime Text cache files
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
 *.sublime-workspace
-
-.DS_Store
-Thumbs.db
-desktop.ini
-
-*.log
-*.cache
-*.bak
-*.old
-
-.env.example
-*.zip
-*.tar.gz
+*.sublime-project
+/tests/tests/
+/tests/results/
