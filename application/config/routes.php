@@ -55,4 +55,5 @@ $route['translate_uri_dashes'] = FALSE;
 $route['api/employees']             = 'employees/index';       
 $route['api/employees/list']        = 'employees/list';         
 $route['api/employees/create']      = 'employees/create';    
-
+$route['api/employees/update/(:num)'] = 'employees/update/$1';
+$route['api/employees/delete/(:num)'] = 'employees/delete/$1';   

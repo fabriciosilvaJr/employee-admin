@@ -26,5 +26,20 @@ class Employees extends CI_Controller {
     }
   }
 
+  public function update($id) {
+    if ($this->input->method(TRUE) === 'POST') {
+      $data = $this->input->post();
+      if ($this->Employee_model->update($id, $data))
+        echo json_encode(['status' => 'success', 'message' => 'Funcionário atualizado com sucesso!']);
+      else
+        echo json_encode(['status' => 'error', 'message' => 'Erro ao atualizar funcionário.']);
+    }
+  }
 
+  public function delete($id) {
+    if ($this->Employee_model->delete($id))
+      echo json_encode(['status' => 'success', 'message' => 'Funcionário excluído com sucesso!']);
+    else
+      echo json_encode(['status' => 'error', 'message' => 'Erro ao excluir funcionário.']);
+  }
 }
