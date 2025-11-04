@@ -91,7 +91,7 @@
                 <td><?= $emp->admission_date; ?></td>
                 <td>
                   <div class="btn-group">
-                    <button class="btn btn-warning btn-sm editBtn">Editar</button>
+                    <button class="btn btn-warning btn-sm editBtn me-2">Editar</button>
                     <button class="btn btn-danger btn-sm deleteBtn">Excluir</button>
                   </div>
                 </td>
