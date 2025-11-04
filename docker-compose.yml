@@ -25,8 +25,8 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./sql:/docker-entrypoint-initdb.d
-       - pg_data:/var/lib/postgresql
+      - ./sql/migrate.sql:/docker-entrypoint-initdb.d/migrate.sql:ro
+      - pg_data:/var/lib/postgresql
     restart: always
 
 volumes:
