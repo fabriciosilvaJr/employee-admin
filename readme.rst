@@ -17,8 +17,6 @@ O sistema realiza **login de usuários** e o **CRUD completo de funcionários**,
 - 🛠️ **Migração automática** do banco de dados via `migrate.sql`
 - 🔁 **Redirecionamento automático para login** caso o usuário não esteja autenticado
 
----
-
 ## 🧱 Tecnologias Utilizadas
 
 | Tecnologia | Descrição |
@@ -31,7 +29,6 @@ O sistema realiza **login de usuários** e o **CRUD completo de funcionários**,
 | **Docker & Docker Compose** | Containerização e orquestração |
 | **DBeaver (opcional)** | Visualização do banco de dados |
 
----
 
 ## ⚙️ Como Rodar o Projeto
 
