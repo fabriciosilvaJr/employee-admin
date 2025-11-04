@@ -46,27 +46,7 @@
         </div>
       </div>
 
-      <!-- Card Perfil -->
-      <div class="col-md-4">
-        <div class="card shadow-sm h-100">
-          <div class="card-body text-center">
-            <h5 class="card-title mb-3">Meu Perfil</h5>
-            <p class="card-text text-muted">Consulte e altere os seus dados de acesso.</p>
-            <a href="#" class="btn btn-secondary w-100 disabled">Em breve</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card Relatórios -->
-      <div class="col-md-4">
-        <div class="card shadow-sm h-100">
-          <div class="card-body text-center">
-            <h5 class="card-title mb-3">Relatórios</h5>
-            <p class="card-text text-muted">Gere relatórios e visualize métricas do sistema.</p>
-            <a href="#" class="btn btn-secondary w-100 disabled">Em breve</a>
-          </div>
-        </div>
-      </div>
+   
     </div>
   </div>
 
