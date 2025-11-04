@@ -21,8 +21,8 @@
 ### 1. Clone o repositório
 ```bash
 https://github.com/fabriciosilvaJr/employee-admin.git
-cd employee-admin
 ```
+cd employee-admin
 
 ### 2. Suba os containers
 ```bash
