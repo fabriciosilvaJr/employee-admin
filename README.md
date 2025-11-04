@@ -1,6 +1,5 @@
 # 🧑‍💼 Sistema de Funcionários - CodeIgniter 3
 
- CRUD completo de funcionários com login, desenvolvido em **CodeIgniter 3**, **PostgreSQL**, **Bootstrap 5** e **Docker**.
 
 ## 🚀 Funcionalidades
 
