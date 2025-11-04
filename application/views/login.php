@@ -4,8 +4,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Login</title>
-
-  <!-- Bootstrap local (recomendado para ambiente Docker offline) -->
    
 <link href="<?= base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet">
 <link href="<?= base_url('assets/css/sign-in.css'); ?>" rel="stylesheet">
@@ -13,7 +11,6 @@
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
   <main class="form-signin w-100 m-auto">
     <form method="post" action="<?php echo site_url('auth/login'); ?>">
-      <img class="mb-4 mx-auto d-block" src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
       <h1 class="h3 mb-3 fw-normal text-center">Please sign in</h1>
 
       <?php if ($this->session->flashdata('error')): ?>
@@ -34,7 +31,7 @@
         <label class="form-check-label" for="flexCheckDefault">Remember me</label>
       </div>
       <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
-      <p class="mt-5 mb-3 text-body-secondary text-center">&copy; 2017–2025</p>
+      <p class="mt-5 mb-3 text-body-secondary text-center">&copy; 2025</p>
     </form>
   </main>
 

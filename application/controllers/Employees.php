@@ -30,10 +30,7 @@ class Employees extends CI_Controller {
 {
     if ($this->input->method(TRUE) === 'POST') {
         $data = $this->input->post();
-
-        // 🚨 Remove o campo id para evitar conflito
         unset($data['id']);
-
         if ($this->Employee_model->update($id, $data)) {
             echo json_encode([
                 'status' => 'success',
