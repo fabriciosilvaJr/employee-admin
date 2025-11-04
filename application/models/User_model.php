@@ -4,7 +4,7 @@ class User_model extends CI_Model {
     public function __construct()
     {
         parent::__construct();
-        $this->load->database(); // <- garante o carregamento do DB
+        $this->load->database();
     }
 
     public function authenticate($email, $password)
