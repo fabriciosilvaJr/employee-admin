@@ -100,11 +100,41 @@
     </div>
   </div>
 
-  <script>
-  $(document).ready(function(){
+  <!-- Modal de confirmação de exclusão -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmDeleteLabel">Confirmar exclusão</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        Tem certeza que deseja excluir <strong id="deleteEmployeeName">este funcionário</strong>?
+        <input type="hidden" id="deleteEmployeeId">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" id="confirmDeleteBtn">
+          <span class="spinner-border spinner-border-sm d-none" id="deleteSpinner" role="status" aria-hidden="true"></span>
+          <span id="deleteBtnText">Excluir</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
 
     const API_URL = '<?= base_url("api/employees"); ?>';
     const modal = new bootstrap.Modal(document.getElementById('employeeModal'));
+    const deleteModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+
+    const $deleteName = $('#deleteEmployeeName');
+    const $deleteId = $('#deleteEmployeeId');
+    const $confirmBtn = $('#confirmDeleteBtn');
+    const $spinner = $('#deleteSpinner');
+    const $btnText = $('#deleteBtnText');
 
     $('#btnAdd').click(() => {
       $('#employeeForm')[0].reset();
@@ -113,9 +143,87 @@
       modal.show();
     });
 
-  
+    $('#employeeForm').on('submit', function(e) {
+      e.preventDefault();
+
+      const id = $('#id').val();
+      const url = id ? `${API_URL}/update/${id}` : `${API_URL}/create`;
+
+      $.ajax({
+        url: url,
+        type: 'POST',
+        data: $(this).serialize(),
+        dataType: 'json',
+        beforeSend: () => $('.modal-title').text('Salvando...'),
+        success: function(res) {
+          alert(res.message);
+          if (res.status === 'success') {
+            modal.hide();
+            setTimeout(() => location.reload(), 500);
+          }
+        },
+        error: function() {
+          alert('Erro ao enviar requisição.');
+        }
+      });
+    });
+
+    $('.editBtn').click(function() {
+      const tr = $(this).closest('tr');
+      $('#id').val(tr.data('id'));
+      $('#employeeForm [name="name"]').val(tr.find('td:eq(1)').text());
+      $('#employeeForm [name="email"]').val(tr.find('td:eq(2)').text());
+      $('#employeeForm [name="position"]').val(tr.find('td:eq(3)').text());
+      $('#employeeForm [name="salary"]').val(tr.find('td:eq(4)').text().replace('.', '').replace(',', '.'));
+      $('#employeeForm [name="admission_date"]').val(tr.find('td:eq(5)').text());
+      $('.modal-title').text('Editar Funcionário');
+      modal.show();
+    });
+
+    $('.deleteBtn').click(function() {
+      const tr = $(this).closest('tr');
+      const id = tr.data('id');
+      const name = tr.find('td:eq(1)').text().trim();
+
+      $deleteId.val(id);
+      $deleteName.text(name || 'este funcionário');
+      deleteModal.show();
+    });
+
+    $confirmBtn.on('click', function() {
+      const id = $deleteId.val();
+      if (!id) return;
+
+      $confirmBtn.prop('disabled', true);
+      $spinner.removeClass('d-none');
+      $btnText.text('Excluindo...');
+
+      $.ajax({
+        url: `${API_URL}/delete/${id}`,
+        type: 'DELETE',
+        dataType: 'json',
+        success: function(res) {
+          if (res.status === 'success') {
+            deleteModal.hide();
+            alert(res.message);
+            setTimeout(() => location.reload(), 500);
+          } else {
+            alert(res.message || 'Erro ao excluir.');
+          }
+        },
+        error: function() {
+          alert('Erro ao tentar excluir o funcionário.');
+        },
+        complete: function() {
+          $confirmBtn.prop('disabled', false);
+          $spinner.addClass('d-none');
+          $btnText.text('Excluir');
+        }
+      });
+    });
 
   });
-  </script>
+</script>
+
 </body>
 </html>
