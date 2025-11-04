@@ -1,38 +1,73 @@
-# 🧑‍💼 Employee Admin – CodeIgniter 3 + PostgreSQL + Docker
+# 🧑‍💼 Sistema de Funcionários - CodeIgniter 3
 
-Aplicação desenvolvida como parte de um **teste técnico** para vaga de desenvolvedor.  
-O sistema realiza **login de usuários** e o **CRUD completo de funcionários**, utilizando **CodeIgniter 3**, **PostgreSQL** e **Bootstrap** — tudo executando em containers **Docker**.
-
-
+Sistema CRUD completo de funcionários com login, desenvolvido em **CodeIgniter 3**, **PostgreSQL**, **Bootstrap 5** e **Docker**.
 
 ## 🚀 Funcionalidades
 
-- 🔐 **Login e autenticação** de usuários (com controle de sessão)
-- 🧾 **CRUD completo de funcionários** (criar, listar, editar e excluir)
-- ⚡ **Interface responsiva** com Bootstrap 5
-- 🔄 **Requisições AJAX/jQuery** sem recarregar a página
-- 💬 **Feedback com Toasts Bootstrap**
-- ❌ **Confirmação de exclusão com modal**
-- 🐳 **Ambiente 100% containerizado com Docker e PostgreSQL**
-- 🛠️ **Migração automática** do banco de dados via `migrate.sql`
-- 🔁 **Redirecionamento automático para login** caso o usuário não esteja autenticado
+- Login com autenticação
+- CRUD completo de funcionários (criar, listar, editar, excluir)
+- Operações AJAX sem recarregar página
+- Interface responsiva com Bootstrap 5
+- Ambiente Docker completo
 
-## 🧱 Tecnologias Utilizadas
+## 🛠️ Tecnologias
 
-| Tecnologia | Descrição |
+- PHP 7.4 + CodeIgniter 3
+- PostgreSQL 13
+- Bootstrap 5 + jQuery
+- Docker + Docker Compose
 
-| **PHP 7.4 + Apache** | Backend e servidor web |
-| **CodeIgniter 3.x** | Framework PHP MVC |
-| **PostgreSQL 18** | Banco de dados relacional |
-| **Bootstrap 5.3** | Framework CSS para layout responsivo |
-| **jQuery 3.7.1** | Manipulação DOM e AJAX |
-| **Docker & Docker Compose** | Containerização e orquestração |
-| **DBeaver (opcional)** | Visualização do banco de dados |
+## ⚙️ Como Executar
 
-
-## ⚙️ Como Rodar o Projeto
-
-### 1️⃣ Clonar o repositório
+### 1. Clone o repositório
 ```bash
 git clone https://github.com/SEU-USUARIO/employee-admin.git
 cd employee-admin
+```
+
+### 2. Suba os containers
+```bash
+docker-compose up -d
+```
+
+### 3. Acesse a aplicação
+```
+http://localhost:8080
+```
+
+**Login padrão:**
+- Email: `admin@example.com`
+- Senha: `123456`
+
+## 📁 Estrutura Principal
+
+```
+├── application/
+│   ├── controllers/    # Auth, Dashboard, Employees
+│   ├── models/         # User_model, Employee_model
+│   └── views/          # Telas de login, dashboard e CRUD
+├── sql/
+│   └── migrate.sql     # Criação automática das tabelas
+├── docker-compose.yml
+├── Dockerfile
+└── .htaccess
+```
+
+## 🗄️ Banco de Dados
+
+**Tabelas criadas automaticamente:**
+- `users` - Usuários do sistema
+- `employees` - Funcionários (nome, email, cargo, salário, data de admissão)
+
+## ✅ Checklist do Teste Técnico
+
+- [x] Tela de login com autenticação
+- [x] CRUD completo de funcionários
+- [x] PostgreSQL com migração automática
+- [x] Bootstrap + jQuery com AJAX
+- [x] Docker + docker-compose
+- [x] Código versionado no GitHub
+
+---
+
+**Desenvolvido como teste técnico**
