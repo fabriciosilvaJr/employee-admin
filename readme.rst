@@ -1,8 +1,8 @@
-🧑‍💼 #Sistema de Funcionários - CodeIgniter 3
+# 🧑‍💼 Sistema de Funcionários - CodeIgniter 3
 
 Sistema CRUD completo de funcionários com login, desenvolvido em **CodeIgniter 3**, **PostgreSQL**, **Bootstrap 5** e **Docker**.
 
-##🚀 Funcionalidades
+## 🚀 Funcionalidades
 
 - Login com autenticação
 - CRUD completo de funcionários (criar, listar, editar, excluir)
@@ -10,7 +10,7 @@ Sistema CRUD completo de funcionários com login, desenvolvido em **CodeIgniter 
 - Interface responsiva com Bootstrap 5
 - Ambiente Docker completo
 
-## 🛠️ Tecnologias
+## 🔧 Tecnologias
 
 - PHP 7.4 + CodeIgniter 3
 - PostgreSQL 13
@@ -58,6 +58,8 @@ http://localhost:8080
 **Tabelas criadas automaticamente:**
 - `users` - Usuários do sistema
 - `employees` - Funcionários (nome, email, cargo, salário, data de admissão)
+
+
 
 ## ✅ Checklist do Teste Técnico
 
