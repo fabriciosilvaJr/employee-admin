@@ -4,8 +4,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Employee_model extends CI_Model
 {
 
-    protected $table = 'employees'; 
-    
+    protected $table = 'employees';
+
     public function __construct()
     {
         parent::__construct();
@@ -24,6 +24,9 @@ class Employee_model extends CI_Model
 
     public function insert($data)
     {
+        if (isset($data['id'])) {
+            unset($data['id']);
+        }
         return $this->db->insert('employees', $data);
     }
 

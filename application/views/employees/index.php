@@ -4,94 +4,144 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gerenciamento de Funcionários</title>
+
   <link href="<?= base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet">
   <script src="<?= base_url('assets/js/jquery-3.7.1.min.js'); ?>"></script>
   <script src="<?= base_url('assets/js/bootstrap.bundle.min.js'); ?>"></script>
+
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    h2 {
+      font-weight: 600;
+      color: #212529;
+    }
+
+    /* Deixa a tabela responsiva com rolagem */
+    .table-responsive {
+      border-radius: .5rem;
+      overflow-x: auto;
+    }
+
+    /* Ajuste visual dos botões em telas pequenas */
+    @media (max-width: 576px) {
+      .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.8rem;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+      }
+
+      #btnAdd {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+      }
+    }
+  </style>
 </head>
+
 <body>
+  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Employee Admin</a>
-      <div class="d-flex">
-        <a href="<?= site_url('auth/logout'); ?>" class="btn btn-outline-light btn-sm">Sair</a>
+    <div class="container-fluid px-3">
+      <a class="navbar-brand fw-bold" href="#">Employee Admin</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <a href="<?= site_url('auth/logout'); ?>" class="btn btn-outline-light btn-sm mt-2 mt-lg-0">Sair</a>
       </div>
     </div>
   </nav>
 
+  <!-- Conteúdo -->
   <div class="container py-5">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-      <h2>Gerenciamento de Funcionários</h2>
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
+      <h2 class="m-0">Gerenciamento de Funcionários</h2>
       <button class="btn btn-primary" id="btnAdd">+ Adicionar Funcionário</button>
     </div>
 
-    <table class="table table-striped table-bordered text-center align-middle">
-      <thead class="table-dark">
-        <tr>
-          <th>ID</th>
-          <th>Nome</th>
-          <th>Email</th>
-          <th>Cargo</th>
-          <th>Salário (R$)</th>
-          <th>Admissão</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php if (!empty($employees)) : ?>
-          <?php foreach ($employees as $emp): ?>
-          <tr data-id="<?= $emp->id; ?>">
-            <td><?= $emp->id; ?></td>
-            <td><?= $emp->name; ?></td>
-            <td><?= $emp->email; ?></td>
-            <td><?= $emp->position; ?></td>
-            <td><?= number_format($emp->salary, 2, ',', '.'); ?></td>
-            <td><?= $emp->admission_date; ?></td>
-            <td>
-              <button class="btn btn-warning btn-sm editBtn">Editar</button>
-              <button class="btn btn-danger btn-sm deleteBtn">Excluir</button>
-            </td>
+    <div class="table-responsive shadow-sm">
+      <table class="table table-striped table-bordered text-center align-middle mb-0">
+        <thead class="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Cargo</th>
+            <th>Salário (R$)</th>
+            <th>Admissão</th>
+            <th>Ações</th>
           </tr>
-          <?php endforeach; ?>
-        <?php else: ?>
-          <tr><td colspan="7" class="text-muted">Nenhum funcionário encontrado.</td></tr>
-        <?php endif; ?>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <?php if (!empty($employees)) : ?>
+            <?php foreach ($employees as $emp): ?>
+              <tr data-id="<?= $emp->id; ?>">
+                <td><?= $emp->id; ?></td>
+                <td><?= $emp->name; ?></td>
+                <td><?= $emp->email; ?></td>
+                <td><?= $emp->position; ?></td>
+                <td><?= number_format($emp->salary, 2, ',', '.'); ?></td>
+                <td><?= $emp->admission_date; ?></td>
+                <td>
+                  <div class="btn-group">
+                    <button class="btn btn-warning btn-sm editBtn">Editar</button>
+                    <button class="btn btn-danger btn-sm deleteBtn">Excluir</button>
+                  </div>
+                </td>
+              </tr>
+            <?php endforeach; ?>
+          <?php else: ?>
+            <tr><td colspan="7" class="text-muted py-4">Nenhum funcionário encontrado.</td></tr>
+          <?php endif; ?>
+        </tbody>
+      </table>
+    </div>
   </div>
 
+  <!-- Modal Funcionário -->
   <div class="modal fade" id="employeeModal" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
         <form id="employeeForm">
-            <input type="hidden" name="id" id="id">
+          <input type="hidden" name="id" id="id">
 
           <div class="modal-header">
             <h5 class="modal-title" id="employeeModalLabel">Novo Funcionário</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
-          <div class="modal-body">
 
-            <div class="mb-3">
-              <label class="form-label">Nome</label>
-              <input type="text" name="name" class="form-control" required>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Email</label>
-              <input type="email" name="email" class="form-control" required>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Cargo</label>
-              <input type="text" name="position" class="form-control" required>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Salário (R$)</label>
-              <input type="number" name="salary" step="0.01" class="form-control" required>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Data de Admissão</label>
-              <input type="date" name="admission_date" class="form-control" required>
+          <div class="modal-body">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Nome</label>
+                <input type="text" name="name" class="form-control" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Cargo</label>
+                <input type="text" name="position" class="form-control" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Salário (R$)</label>
+                <input type="number" name="salary" step="0.01" class="form-control" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Data de Admissão</label>
+                <input type="date" name="admission_date" class="form-control" required>
+              </div>
             </div>
           </div>
+
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-success">Salvar</button>
@@ -101,35 +151,38 @@
     </div>
   </div>
 
-<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="confirmDeleteLabel">Confirmar exclusão</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-      </div>
-      <div class="modal-body">
-        Tem certeza que deseja excluir <strong id="deleteEmployeeName">este funcionário</strong>?
-        <input type="hidden" id="deleteEmployeeId">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-danger" id="confirmDeleteBtn">
-          <span class="spinner-border spinner-border-sm d-none" id="deleteSpinner" role="status" aria-hidden="true"></span>
-          <span id="deleteBtnText">Excluir</span>
-        </button>
+  <!-- Modal de Exclusão -->
+  <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmDeleteLabel">Confirmar exclusão</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          Tem certeza que deseja excluir <strong id="deleteEmployeeName">este funcionário</strong>?
+          <input type="hidden" id="deleteEmployeeId">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" id="confirmDeleteBtn">
+            <span class="spinner-border spinner-border-sm d-none" id="deleteSpinner"></span>
+            <span id="deleteBtnText">Excluir</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 9999">
-  <div id="toastMessage" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="d-flex">
-      <div class="toast-body fw-semibold"></div>
-      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Fechar"></button>
+
+  <!-- Toast -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="toastMessage" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body fw-semibold"></div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
     </div>
   </div>
-</div>
 
 <script>
   $(document).ready(function() {
@@ -171,7 +224,7 @@
           showToast(res.message, res.status === 'success' ? 'success' : 'danger');
           if (res.status === 'success') {
             modal.hide();
-            setTimeout(() => location.reload(), 800);
+            setTimeout(() => location.reload(), 1500);
           }
         },
         error: function() {
@@ -222,7 +275,7 @@
           showToast(res.message, res.status === 'success' ? 'success' : 'danger');
           if (res.status === 'success') {
             deleteModal.hide();
-            setTimeout(() => location.reload(), 800);
+            setTimeout(() => location.reload(), 1500);
           }
         },
         error: function() {
