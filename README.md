@@ -20,7 +20,7 @@
 
 ### 1. Clone o repositório
 ```bash
-https://github.com/fabriciosilvaJr/employee-admin.git
+git clone https://github.com/SEU-USUARIO/employee-admin.git
 ```
 cd employee-admin
 
