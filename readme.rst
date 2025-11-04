@@ -1,71 +1,41 @@
-###################
-What is CodeIgniter
-###################
+# 🧑‍💼 Employee Admin – CodeIgniter 3 + PostgreSQL + Docker
 
-CodeIgniter is an Application Development Framework - a toolkit - for people
-who build web sites using PHP. Its goal is to enable you to develop projects
-much faster than you could if you were writing code from scratch, by providing
-a rich set of libraries for commonly needed tasks, as well as a simple
-interface and logical structure to access these libraries. CodeIgniter lets
-you creatively focus on your project by minimizing the amount of code needed
-for a given task.
+Aplicação desenvolvida como parte de um **teste técnico** para vaga de desenvolvedor.  
+O sistema realiza **login de usuários** e o **CRUD completo de funcionários**, utilizando **CodeIgniter 3**, **PostgreSQL** e **Bootstrap** — tudo executando em containers **Docker**.
 
-*******************
-Release Information
-*******************
+---
 
-This repo contains in-development code for future releases. To download the
-latest stable release please visit the `CodeIgniter Downloads
-<https://codeigniter.com/download>`_ page.
+## 🚀 Funcionalidades
 
-**************************
-Changelog and New Features
-**************************
+- 🔐 **Login e autenticação** de usuários (com controle de sessão)
+- 🧾 **CRUD completo de funcionários** (criar, listar, editar e excluir)
+- ⚡ **Interface responsiva** com Bootstrap 5
+- 🔄 **Requisições AJAX/jQuery** sem recarregar a página
+- 💬 **Feedback com Toasts Bootstrap**
+- ❌ **Confirmação de exclusão com modal**
+- 🐳 **Ambiente 100% containerizado com Docker e PostgreSQL**
+- 🛠️ **Migração automática** do banco de dados via `migrate.sql`
+- 🔁 **Redirecionamento automático para login** caso o usuário não esteja autenticado
 
-You can find a list of all changes for each release in the `user
-guide change log <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/changelog.rst>`_.
+---
 
-*******************
-Server Requirements
-*******************
+## 🧱 Tecnologias Utilizadas
 
-PHP version 5.6 or newer is recommended.
+| Tecnologia | Descrição |
+|-------------|------------|
+| **PHP 7.4 + Apache** | Backend e servidor web |
+| **CodeIgniter 3.x** | Framework PHP MVC |
+| **PostgreSQL 18** | Banco de dados relacional |
+| **Bootstrap 5.3** | Framework CSS para layout responsivo |
+| **jQuery 3.7.1** | Manipulação DOM e AJAX |
+| **Docker & Docker Compose** | Containerização e orquestração |
+| **DBeaver (opcional)** | Visualização do banco de dados |
 
-It should work on 5.3.7 as well, but we strongly advise you NOT to run
-such old versions of PHP, because of potential security and performance
-issues, as well as missing features.
+---
 
-************
-Installation
-************
+## ⚙️ Como Rodar o Projeto
 
-Please see the `installation section <https://codeigniter.com/userguide3/installation/index.html>`_
-of the CodeIgniter User Guide.
-
-*******
-License
-*******
-
-Please see the `license
-agreement <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/license.rst>`_.
-
-*********
-Resources
-*********
-
--  `User Guide <https://codeigniter.com/docs>`_
--  `Contributing Guide <https://github.com/bcit-ci/CodeIgniter/blob/develop/contributing.md>`_
--  `Language File Translations <https://github.com/bcit-ci/codeigniter3-translations>`_
--  `Community Forums <http://forum.codeigniter.com/>`_
--  `Community Wiki <https://github.com/bcit-ci/CodeIgniter/wiki>`_
--  `Community Slack Channel <https://codeigniterchat.slack.com>`_
-
-Report security issues to our `Security Panel <mailto:security@codeigniter.com>`_
-or via our `page on HackerOne <https://hackerone.com/codeigniter>`_, thank you.
-
-***************
-Acknowledgement
-***************
-
-The CodeIgniter team would like to thank EllisLab, all the
-contributors to the CodeIgniter project and you, the CodeIgniter user.
+### 1️⃣ Clonar o repositório
+```bash
+git clone https://github.com/SEU-USUARIO/employee-admin.git
+cd employee-admin
