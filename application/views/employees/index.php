@@ -59,7 +59,6 @@
     </table>
   </div>
 
-  <!-- Modal de cadastro/edição -->
   <div class="modal fade" id="employeeModal" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -100,7 +99,6 @@
     </div>
   </div>
 
-  <!-- Modal de confirmação de exclusão -->
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -122,6 +120,14 @@
     </div>
   </div>
 </div>
+<div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 9999">
+  <div id="toastMessage" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body fw-semibold"></div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Fechar"></button>
+    </div>
+  </div>
+</div>
 
 <script>
   $(document).ready(function() {
@@ -129,12 +135,16 @@
     const API_URL = '<?= base_url("api/employees"); ?>';
     const modal = new bootstrap.Modal(document.getElementById('employeeModal'));
     const deleteModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+    const toastEl = document.getElementById('toastMessage');
+    const toast = new bootstrap.Toast(toastEl);
 
-    const $deleteName = $('#deleteEmployeeName');
-    const $deleteId = $('#deleteEmployeeId');
-    const $confirmBtn = $('#confirmDeleteBtn');
-    const $spinner = $('#deleteSpinner');
-    const $btnText = $('#deleteBtnText');
+    const showToast = (msg, type = 'primary') => {
+      const $toast = $('#toastMessage');
+      $toast.removeClass('text-bg-primary text-bg-success text-bg-danger');
+      $toast.addClass(`text-bg-${type}`);
+      $toast.find('.toast-body').text(msg);
+      toast.show();
+    };
 
     $('#btnAdd').click(() => {
       $('#employeeForm')[0].reset();
@@ -156,14 +166,14 @@
         dataType: 'json',
         beforeSend: () => $('.modal-title').text('Salvando...'),
         success: function(res) {
-          alert(res.message);
+          showToast(res.message, res.status === 'success' ? 'success' : 'danger');
           if (res.status === 'success') {
             modal.hide();
-            setTimeout(() => location.reload(), 500);
+            setTimeout(() => location.reload(), 800);
           }
         },
         error: function() {
-          alert('Erro ao enviar requisição.');
+          showToast('Erro ao enviar requisição.', 'danger');
         }
       });
     });
@@ -185,45 +195,48 @@
       const id = tr.data('id');
       const name = tr.find('td:eq(1)').text().trim();
 
-      $deleteId.val(id);
-      $deleteName.text(name || 'este funcionário');
+      $('#deleteEmployeeId').val(id);
+      $('#deleteEmployeeName').text(name || 'este funcionário');
       deleteModal.show();
     });
 
-    $confirmBtn.on('click', function() {
-      const id = $deleteId.val();
+    $('#confirmDeleteBtn').on('click', function() {
+      const id = $('#deleteEmployeeId').val();
       if (!id) return;
 
-      $confirmBtn.prop('disabled', true);
-      $spinner.removeClass('d-none');
-      $btnText.text('Excluindo...');
+      const btn = $(this);
+      const spinner = $('#deleteSpinner');
+      const btnText = $('#deleteBtnText');
+
+      btn.prop('disabled', true);
+      spinner.removeClass('d-none');
+      btnText.text('Excluindo...');
 
       $.ajax({
         url: `${API_URL}/delete/${id}`,
         type: 'DELETE',
         dataType: 'json',
         success: function(res) {
+          showToast(res.message, res.status === 'success' ? 'success' : 'danger');
           if (res.status === 'success') {
             deleteModal.hide();
-            alert(res.message);
-            setTimeout(() => location.reload(), 500);
-          } else {
-            alert(res.message || 'Erro ao excluir.');
+            setTimeout(() => location.reload(), 800);
           }
         },
         error: function() {
-          alert('Erro ao tentar excluir o funcionário.');
+          showToast('Erro ao tentar excluir o funcionário.', 'danger');
         },
         complete: function() {
-          $confirmBtn.prop('disabled', false);
-          $spinner.addClass('d-none');
-          $btnText.text('Excluir');
+          btn.prop('disabled', false);
+          spinner.addClass('d-none');
+          btnText.text('Excluir');
         }
       });
     });
 
   });
 </script>
+
 
 </body>
 </html>
