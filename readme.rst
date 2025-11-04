@@ -3,7 +3,7 @@
 Aplicação desenvolvida como parte de um **teste técnico** para vaga de desenvolvedor.  
 O sistema realiza **login de usuários** e o **CRUD completo de funcionários**, utilizando **CodeIgniter 3**, **PostgreSQL** e **Bootstrap** — tudo executando em containers **Docker**.
 
----
+
 
 ## 🚀 Funcionalidades
 
@@ -20,7 +20,7 @@ O sistema realiza **login de usuários** e o **CRUD completo de funcionários**,
 ## 🧱 Tecnologias Utilizadas
 
 | Tecnologia | Descrição |
-|-------------|------------|
+
 | **PHP 7.4 + Apache** | Backend e servidor web |
 | **CodeIgniter 3.x** | Framework PHP MVC |
 | **PostgreSQL 18** | Banco de dados relacional |
