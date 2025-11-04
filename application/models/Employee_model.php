@@ -1,8 +1,11 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Employee_model extends CI_Model {
+class Employee_model extends CI_Model
+{
 
+    protected $table = 'employees'; 
+    
     public function __construct()
     {
         parent::__construct();
@@ -26,7 +29,8 @@ class Employee_model extends CI_Model {
 
     public function update($id, $data)
     {
-        return $this->db->where('id', $id)->update('employees', $data);
+        unset($data['id']);
+        return $this->db->where('id', $id)->update($this->table, $data);
     }
 
     public function delete($id)

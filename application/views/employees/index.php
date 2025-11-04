@@ -63,6 +63,8 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <form id="employeeForm">
+            <input type="hidden" name="id" id="id">
+
           <div class="modal-header">
             <h5 class="modal-title" id="employeeModalLabel">Novo Funcionário</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
